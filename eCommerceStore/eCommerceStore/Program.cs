@@ -1,5 +1,6 @@
 using eCommerceStore.Mappings;
 using eCommerceStore.Models.Data;
+using eCommerceStore.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ECommerceDbContext>(options=>options.UseInMemoryDatabase("ECommerceMemory"));
+builder.Services.AddScoped<IItemRepository, ItemRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -23,12 +23,7 @@ namespace eCommerceStore.Controllers
 
         [HttpPost]
         public async Task<IActionResult> AddItemsToCart(AddCartItemRequestDto addCartItemRequestDto)
-        {
-            /*var cartItem = new CartItem
-            {
-                ItemId = addCartItemRequestDto.ItemId,
-                Quantity = addCartItemRequestDto.quantity
-            };*/
+        {            
             //map add cart request DTO to cartItem domain model
             var cartItem = mapper.Map<CartItem>(addCartItemRequestDto);
             await dbContext.CartItems.AddAsync(cartItem);
