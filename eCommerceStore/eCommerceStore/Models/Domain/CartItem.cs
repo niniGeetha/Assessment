@@ -3,7 +3,11 @@
     public class CartItem
     {
         public int Id { get; set; }
-        public required Item Item { get; set; }
-        public required float Quantity { get; set; }
+        public int ItemId { get; set; }
+
+        public float Quantity { get; set; }
+
+        //Navigation properties
+        public Item Item { get; set; }
     }
 }
