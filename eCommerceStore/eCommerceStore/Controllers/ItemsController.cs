@@ -1,5 +1,7 @@
-﻿using eCommerceStore.Models.Data;
+﻿using AutoMapper;
+using eCommerceStore.Models.Data;
 using eCommerceStore.Models.Domain;
+using eCommerceStore.Models.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,16 +13,20 @@ namespace eCommerceStore.Controllers
     public class ItemsController : ControllerBase
     {
         private readonly ECommerceDbContext dbContext;
+        private readonly IMapper mapper;
 
-        public ItemsController(ECommerceDbContext dbContext)
+        public ItemsController(ECommerceDbContext dbContext, IMapper mapper)
         {
             this.dbContext = dbContext;
+            this.mapper = mapper;
         }
         [HttpGet]
         public async Task<IActionResult> GetItems() {
 
             var items =  await dbContext.Items.ToListAsync();
-            return Ok(items);
+            //Map domain model to DTO 
+            var itemsDto = mapper.Map<List<ItemDto>>(items);
+            return Ok(itemsDto);
 
         }
 
@@ -29,30 +35,39 @@ namespace eCommerceStore.Controllers
         public async Task<IActionResult> GetItemById(int id)
         {
             var item = await dbContext.Items.FirstOrDefaultAsync(x => x.Id == id);
-            return Ok(item);
+            //Map domain to DTO
+            var itemDTO = mapper.Map<ItemDto>(item);
+            return Ok(itemDTO);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateItems(Item item)
+        public async Task<IActionResult> CreateItems(AddItemRequestDto addItemRequestDto)
         {
+            //Map DTO to domain model
+            var item = mapper.Map<Item>(addItemRequestDto);
+            
             await dbContext.Items.AddAsync(item);
             await dbContext.SaveChangesAsync();
 
-            return Ok();
+            //Map Domain to DTO
+            var itemDto = mapper.Map<ItemDto>(item);
+
+            return Ok(itemDto);
         }
 
         [HttpPut]        
-        public async Task<IActionResult> UpdateItem(Item item)
+        public async Task<IActionResult> UpdateItem(UpdateItemRequestDto updateItemRequestDto)
         {
-            var existingItem = await dbContext.Items.FirstOrDefaultAsync(x => x.Id == item.Id);
+            var existingItem = await dbContext.Items.FirstOrDefaultAsync(x => x.Id == updateItemRequestDto.Id);
             if(existingItem == null)
             {
                 return NotFound();
             }
-            existingItem.Title = item.Title;
-            existingItem.Price = item.Price;
+            existingItem = mapper.Map<Item>(updateItemRequestDto);
             await dbContext.SaveChangesAsync();
-            return Ok(existingItem);
+            //map domain model to DTO
+            var itemDTO = mapper.Map<ItemDto>(existingItem);
+            return Ok(itemDTO);
         }
 
         [HttpDelete]
