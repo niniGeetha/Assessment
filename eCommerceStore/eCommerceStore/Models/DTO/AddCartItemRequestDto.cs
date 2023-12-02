@@ -5,9 +5,8 @@ namespace eCommerceStore.Models.DTO
 {
     public class AddCartItemRequestDto
     {
-        [Required]
-        [MinLength(1)]
-        public int  ItemId { get; set; }
+        [Required]        
+        public int ItemId { get; set; }
 
         [Required]
         [Range(1, float.MaxValue)]
