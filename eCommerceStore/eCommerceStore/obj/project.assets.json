@@ -1149,11 +1149,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ninih\\OneDrive\\Documents\\Learning\\Auctria\\eCommerceStore\\eCommerceStore\\eCommerceStore.csproj",
+      "projectUniqueName": "C:\\Users\\ninih\\OneDrive\\Documents\\Learning\\Auctria\\eCommerceStoreNew\\eCommerceStore\\eCommerceStore\\eCommerceStore.csproj",
       "projectName": "eCommerceStore",
-      "projectPath": "C:\\Users\\ninih\\OneDrive\\Documents\\Learning\\Auctria\\eCommerceStore\\eCommerceStore\\eCommerceStore.csproj",
+      "projectPath": "C:\\Users\\ninih\\OneDrive\\Documents\\Learning\\Auctria\\eCommerceStoreNew\\eCommerceStore\\eCommerceStore\\eCommerceStore.csproj",
       "packagesPath": "C:\\Users\\ninih\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ninih\\OneDrive\\Documents\\Learning\\Auctria\\eCommerceStore\\eCommerceStore\\obj\\",
+      "outputPath": "C:\\Users\\ninih\\OneDrive\\Documents\\Learning\\Auctria\\eCommerceStoreNew\\eCommerceStore\\eCommerceStore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
