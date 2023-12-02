@@ -36,5 +36,13 @@ namespace eCommerceStore.Repositories
             await dbContext.SaveChangesAsync();
             return cartItem;
         }
+
+        public async Task<CartItem> DeleteCartAsync(CartItem cartItem)
+        {
+            dbContext.CartItems.Remove(cartItem);
+            await dbContext.SaveChangesAsync();
+            return cartItem;
+
+        }
     }
 }

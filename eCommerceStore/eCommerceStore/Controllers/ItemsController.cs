@@ -35,6 +35,8 @@ namespace eCommerceStore.Controllers
         [Route("id")]
         public async Task<IActionResult> GetItemById(int id)
         {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
             var item = await itemRepository.GetItemByIdAsync(id);
             if (item is null)
                 return NotFound();
@@ -46,6 +48,8 @@ namespace eCommerceStore.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateItems(AddItemRequestDto addItemRequestDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             //Map DTO to domain model
             var item = mapper.Map<Item>(addItemRequestDto);
 
@@ -60,13 +64,8 @@ namespace eCommerceStore.Controllers
         [HttpPut]        
         public async Task<IActionResult> UpdateItem(UpdateItemRequestDto updateItemRequestDto)
         {
-            /*var existingItem = await dbContext.Items.FirstOrDefaultAsync(x => x.Id == updateItemRequestDto.Id);
-            if(existingItem == null)
-            {
-                return NotFound();
-            }
-            existingItem = mapper.Map<Item>(updateItemRequestDto);
-            await dbContext.SaveChangesAsync();*/
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             //map domain model to DTO
             var item = mapper.Map<Item>(updateItemRequestDto);
             item = await itemRepository.UpdateItemAsync(item);
@@ -79,7 +78,9 @@ namespace eCommerceStore.Controllers
         [HttpDelete]
         [Route("id")]
         public async Task<IActionResult> DeleteItem(int id)
-        {            
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var item = await itemRepository.DeleteItemAsync(id);
             if (item is null)
                 return NotFound();

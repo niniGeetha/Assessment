@@ -9,5 +9,7 @@ namespace eCommerceStore.Repositories
         Task<List<CartItem>> GetAllItemsFromCartAsync();
 
         Task<CartItem> UpdateCartAsync(CartItem cartItem);
+
+        Task<CartItem> DeleteCartAsync(CartItem cartItem);
     }
 }

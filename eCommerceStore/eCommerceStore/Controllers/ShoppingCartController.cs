@@ -25,6 +25,8 @@ namespace eCommerceStore.Controllers
         [HttpPost]
         public async Task<IActionResult> AddItemsToCart(AddCartItemRequestDto addCartItemRequestDto)
         {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
             //map add cart request DTO to cartItem domain model
             var item = await itemRepository.GetItemByIdAsync(addCartItemRequestDto.ItemId);
             if (item == null) return NotFound(); 
@@ -38,7 +40,7 @@ namespace eCommerceStore.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetCartContents()
-        {
+        {            
             var cartContents = await shoppingCartRepository.GetAllItemsFromCartAsync();
             //convert cartItem domain to cartItemDto DTO object
             var cartItemDtos = mapper.Map<List<CartItemDto>>(cartContents);            
@@ -49,11 +51,13 @@ namespace eCommerceStore.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateCartItemQuantity(UpdateCartItemRequestDto updateCartItemRequestDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var item = await itemRepository.GetItemByIdAsync(updateCartItemRequestDto.ItemId);
             if (item == null) return NotFound();
             //map updateCartItemRequest DTO to domain model cartItem
             var cartItem = mapper.Map<CartItem>(updateCartItemRequestDto);
-            cartItem.Item = item;
+            cartItem.Item = item;            
             cartItem = await shoppingCartRepository.UpdateCartAsync(cartItem);
             if (cartItem is null)
                 return NotFound();            
