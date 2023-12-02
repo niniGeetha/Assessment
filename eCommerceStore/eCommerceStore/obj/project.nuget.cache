@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wXlVvuVTAcjmKsePFfz1VXXI/xf7wvLqBBqKbHj+CviJ0K/Xk86trgs47chiW9noIuL1IoHOtwvxSl8g/O8wrA==",
+  "dgSpecHash": "Dfx2bh1xTbiqipn7YGgsT0Z9kU6/UnmmyhY/RitPbm2RT4e4J4RKk4G/RmlyN2HzdwBQdddE/3E0ChPkpJDk0g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ninih\\OneDrive\\Documents\\Learning\\Auctria\\eCommerceStoreNew\\eCommerceStore\\eCommerceStore\\eCommerceStore.csproj",
+  "projectFilePath": "C:\\Users\\ninih\\OneDrive\\Documents\\Learning\\TestAuctria\\eCommerceStore\\eCommerceStore\\eCommerceStore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ninih\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ninih\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
