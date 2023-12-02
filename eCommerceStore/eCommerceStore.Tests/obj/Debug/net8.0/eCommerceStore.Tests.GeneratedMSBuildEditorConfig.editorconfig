@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = eCommerceStore.Tests
-build_property.ProjectDir = C:\Users\ninih\OneDrive\Documents\Learning\Auctria\eCommerceStoreNew\eCommerceStore\eCommerceStore.Tests\
+build_property.ProjectDir = C:\Users\ninih\OneDrive\Documents\Learning\TestAuctria\eCommerceStore\eCommerceStore.Tests\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
