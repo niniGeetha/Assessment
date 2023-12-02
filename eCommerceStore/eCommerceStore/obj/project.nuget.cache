@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "NcgAKVwHgckBU6/wuuUUxgYV0gqPfZZLp/LZ9i3t1P6aNCYXXRTZuAm7+fSqZPvfy3BiO/dIQ0MqK1qVA8EVOA==",
+  "dgSpecHash": "wXlVvuVTAcjmKsePFfz1VXXI/xf7wvLqBBqKbHj+CviJ0K/Xk86trgs47chiW9noIuL1IoHOtwvxSl8g/O8wrA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ninih\\OneDrive\\Documents\\Learning\\Auctria\\eCommerceStore\\eCommerceStore\\eCommerceStore.csproj",
+  "projectFilePath": "C:\\Users\\ninih\\OneDrive\\Documents\\Learning\\Auctria\\eCommerceStoreNew\\eCommerceStore\\eCommerceStore\\eCommerceStore.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ninih\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\ninih\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
+    "C:\\Users\\ninih\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\ninih\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.0\\microsoft.entityframeworkcore.8.0.0.nupkg.sha512",
     "C:\\Users\\ninih\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.0\\microsoft.entityframeworkcore.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\ninih\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.0\\microsoft.entityframeworkcore.analyzers.8.0.0.nupkg.sha512",

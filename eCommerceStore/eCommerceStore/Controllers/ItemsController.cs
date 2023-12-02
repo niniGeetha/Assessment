@@ -1,5 +1,8 @@
-﻿using eCommerceStore.Models.Data;
+﻿using AutoMapper;
+using eCommerceStore.Models.Data;
 using eCommerceStore.Models.Domain;
+using eCommerceStore.Models.DTO;
+using eCommerceStore.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,18 +12,22 @@ namespace eCommerceStore.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class ItemsController : ControllerBase
-    {
-        private readonly ECommerceDbContext dbContext;
+    {        
+        private readonly IMapper mapper;
+        private readonly IItemRepository itemRepository;
 
-        public ItemsController(ECommerceDbContext dbContext)
-        {
-            this.dbContext = dbContext;
+        public ItemsController(IMapper mapper, IItemRepository itemRepository)
+        {            
+            this.mapper = mapper;
+            this.itemRepository = itemRepository;
         }
         [HttpGet]
         public async Task<IActionResult> GetItems() {
 
-            var items =  await dbContext.Items.ToListAsync();
-            return Ok(items);
+            var items = await itemRepository.GetAllItemsAsync();
+            //Map domain model to DTO 
+            var itemsDto = mapper.Map<List<ItemDto>>(items);
+            return Ok(itemsDto);
 
         }
 
@@ -28,48 +35,59 @@ namespace eCommerceStore.Controllers
         [Route("id")]
         public async Task<IActionResult> GetItemById(int id)
         {
-            var item = await dbContext.Items.FirstOrDefaultAsync(x => x.Id == id);
-            return Ok(item);
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var item = await itemRepository.GetItemByIdAsync(id);
+            if (item is null)
+                return NotFound();
+            //Map domain to DTO
+            var itemDTO = mapper.Map<ItemDto>(item);
+            return Ok(itemDTO);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateItems(Item item)
+        public async Task<IActionResult> CreateItems(AddItemRequestDto addItemRequestDto)
         {
-            await dbContext.Items.AddAsync(item);
-            await dbContext.SaveChangesAsync();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            //Map DTO to domain model
+            var item = mapper.Map<Item>(addItemRequestDto);
 
-            return Ok();
+            item = await itemRepository.CreateItemAsync(item);
+
+            //Map Domain to DTO
+            var itemDto = mapper.Map<ItemDto>(item);
+
+            return Ok(itemDto);
         }
 
         [HttpPut]        
-        public async Task<IActionResult> UpdateItem(Item item)
+        public async Task<IActionResult> UpdateItem(UpdateItemRequestDto updateItemRequestDto)
         {
-            var existingItem = await dbContext.Items.FirstOrDefaultAsync(x => x.Id == item.Id);
-            if(existingItem == null)
-            {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            //map domain model to DTO
+            var item = mapper.Map<Item>(updateItemRequestDto);
+            item = await itemRepository.UpdateItemAsync(item);
+            if (item is null)
                 return NotFound();
-            }
-            existingItem.Title = item.Title;
-            existingItem.Price = item.Price;
-            await dbContext.SaveChangesAsync();
-            return Ok(existingItem);
+            var itemDTO = mapper.Map<ItemDto>(item);
+            return Ok(itemDTO);
         }
 
         [HttpDelete]
         [Route("id")]
         public async Task<IActionResult> DeleteItem(int id)
         {
-            var existingItem = await dbContext.Items.FirstOrDefaultAsync(x => x.Id == id);
-            if(existingItem == null)
-            {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var item = await itemRepository.DeleteItemAsync(id);
+            if (item is null)
                 return NotFound();
-            }
-            dbContext.Items.Remove(existingItem);
-            await dbContext.SaveChangesAsync();
-            return Ok();
+            var itemDTO = mapper.Map<ItemDto>(item);
+            return Ok(itemDTO);
 
         }
-
 
     }
 }
