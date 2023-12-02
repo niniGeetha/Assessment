@@ -36,6 +36,8 @@ namespace eCommerceStore.Controllers
         public async Task<IActionResult> GetItemById(int id)
         {
             var item = await itemRepository.GetItemByIdAsync(id);
+            if (item is null)
+                return NotFound();
             //Map domain to DTO
             var itemDTO = mapper.Map<ItemDto>(item);
             return Ok(itemDTO);

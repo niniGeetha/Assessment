@@ -40,6 +40,7 @@ namespace eCommerceStore.Repositories
         public async Task<Item> GetItemByIdAsync(int id)
         {
             var item = await dbContext.Items.SingleOrDefaultAsync(x=>x.Id == id);
+            if (item is null) return null;
             return item;
         }
 

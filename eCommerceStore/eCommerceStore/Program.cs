@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ECommerceDbContext>(options=>options.UseInMemoryDatabase("ECommerceMemory"));
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
+builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
